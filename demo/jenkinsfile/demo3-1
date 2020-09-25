@@ -28,6 +28,7 @@ pipeline {
         }
         stage("Deploying"){
             input {
+                message "Pick environment"
                 parameters {
                     string(name: "ENVIRONMENT", defaultValue: "production", description: "Description")
                 }
