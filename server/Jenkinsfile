@@ -3,7 +3,9 @@ pipeline {
     parameters{
         string(name: "ENVIRONMENT", defaultValue: "development", description: "The environment that the app runs")
     }
-    def root = tool name: 'Go 1.12', type: 'go'
+    script {
+        def root = tool name: 'Go 1.12', type: 'go'
+    }
 
     stages{
         stage("Audit tools"){
