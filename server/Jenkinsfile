@@ -1,10 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'golang:1.14-buster'
+        }
+    }
     parameters{
         string(name: "ENVIRONMENT", defaultValue: "development", description: "The environment that the app runs")
-    }
-    script {
-        def root = tool name: 'Go 1.12', type: 'go'
     }
 
     stages{
