@@ -34,9 +34,7 @@ pipeline {
                 }
             }
             steps{
-                sh '''
-                    echo "Deploying to ${params.ENVIRONMENT}"
-                '''
+                echo "Deploying to ${params.ENVIRONMENT}"
                 writeFile file: "test.xt", text: "hello world"
             }
         }
