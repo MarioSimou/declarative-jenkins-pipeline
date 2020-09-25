@@ -20,12 +20,21 @@ pipeline {
                         echo "Building for $STAGE_NAME"
                     }
                 }
+                stage("show key"){
+                    steps {
+                        withCredentials([
+                            string(credentialsId: "slack5", variable: "SLACK_TOKEN")
+                        ]){
+                            echo "TOKEN: ${SLACK_TOKEN}"
+                        }
+                    }
+                }
             }
         }
         stage("Testing"){
             steps {
                 sh '''
-                    echo "Runnint unit tests"
+                    echo "Running unit tests"
                 '''
             }
         }
@@ -39,6 +48,7 @@ pipeline {
     post {
         success {
             archiveArtifacts "test.txt"
+            slackSend color: "good", message: "Message from Jenkins pipeline"
         }
     }
 }
