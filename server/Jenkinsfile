@@ -25,10 +25,12 @@ pipeline {
             }
         }
         stage("Build app"){
-            steps {
-                sh '''
-                    go build -o ./bin/server ./cmd/server/main.go
-                '''
+            dir("./server"){
+                steps {
+                    sh '''
+                        go build -o ./bin/server ./cmd/server/main.go
+                    '''
+                }
             }
         }
         stage("Deploy"){
