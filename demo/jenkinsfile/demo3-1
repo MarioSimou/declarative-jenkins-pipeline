@@ -41,6 +41,12 @@ pipeline {
         stage("Deploying"){
             steps{
                 echo "Deploying to ${params.ENVIRONMENT}"
+                script {
+                    if(Math.random() > 0.5){
+                        throw new Exception()
+                    }
+                }
+
                 writeFile file: "test.txt", text: "hello world"
             }
         }
@@ -48,7 +54,10 @@ pipeline {
     post {
         success {
             archiveArtifacts "test.txt"
-            slackSend color: "good", message: "Message from Jenkins pipeline"
+            slackSend(color: "good", channel: "#jenkins",message: "Message from Jenkins pipeline")
+        }
+        failure {
+            slackSend color: "danger", channel: "#jenkins", message: "Failure in the pipeline")
         }
     }
 }
