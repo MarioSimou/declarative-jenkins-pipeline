@@ -57,7 +57,7 @@ pipeline {
             slackSend(color: "good", channel: "#jenkins",message: "Message from Jenkins pipeline")
         }
         failure {
-            slackSend color: "danger", channel: "#jenkins", message: "Failure in the pipeline")
+            slackSend(color: "danger", channel: "#jenkins", message: "Failure in the pipeline")
         }
     }
 }
