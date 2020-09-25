@@ -1,9 +1,7 @@
 pipeline {
     agent any
-    input {
-        parameters{
-            string(name: "ENVIRONMENT", defaultValue: "development", description: "The environment that the app runs")
-        }
+    parameters{
+        string(name: "ENVIRONMENT", defaultValue: "development", description: "The environment that the app runs")
     }
 
     stages{
