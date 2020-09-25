@@ -1,14 +1,16 @@
 pipeline {
-  agent any
-  stages {
-    stage('stage1') {
-      steps {
-        echo "Hello World $DEMO"
-      }
+    agent any
+
+    envirnment {
+        DEMO="1.3"
     }
 
-  }
-  environment {
-    DEMO = '1'
-  }
+    stages {
+        stage('First stage') {
+            steps {
+                echo "This is $BUILD_NUMBER of demo $DEMO"
+                sh 'echo "hello world" > test.sh && chmod +x ./test.sh && ./test.sh'
+            }
+        }
+    }
 }
