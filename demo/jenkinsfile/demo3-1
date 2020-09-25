@@ -3,6 +3,9 @@ pipeline {
     environment {
         RELEASE="20.04"
     }
+    parameters {
+        string(name: "ENVIRONMENT", defaultValue: "PRODUCTION", description: "Environment to deploy")
+    }
 
     stages {
         stage("Build"){
@@ -27,15 +30,9 @@ pipeline {
             }
         }
         stage("Deploying"){
-            input {
-                message "Pick environment"
-                parameters {
-                    string(name: "ENVIRONMENT", defaultValue: "production", description: "Description")
-                }
-            }
             steps{
                 echo "Deploying to ${params.ENVIRONMENT}"
-                writeFile file: "test.xt", text: "hello world"
+                writeFile file: "test.txt", text: "hello world"
             }
         }
     }
