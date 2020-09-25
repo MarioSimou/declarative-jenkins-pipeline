@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE="20.04"
+    }
+
+    stages {
+        stage("Build"){
+            environment {
+                LOG_LEVEL="logging"
+            }
+
+            steps {
+                sh '''
+                    printf "Building release %s with a log level %s\n" ${RELEASE} ${LOG_LEVEL}
+                '''
+            }
+        }    
+        stage("Test"){
+            steps {
+                sh '''
+                    printf "Running tests\n"
+                '''
+            }
+        }
+        stage("Deploy"){
+            steps{
+                parameters {
+                    string(name: "ENVIRONMENT", defaultValue: "production", description: "Environment we deploy")
+                }
+
+                sh '''
+                    printf "App is deployed on %s\n" $ENVIRONMENT
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            printf "Cleaning directory\n"
+        }
+    }
+}
