@@ -11,17 +11,17 @@ pipeline {
             parallel {
                 stage("linux-amd64"){
                     steps {
-                        echo "Building for $RELASE on $STAGE_NAME"
+                        echo "Building for $RELEASE on $STAGE_NAME"
                     }
                 }
                 stage("linux-arm64"){
                     steps {
-                        echo "Building for $RELASE on $STAGE_NAME"
+                        echo "Building for $RELEASE on $STAGE_NAME"
                     }
                 }
                 stage("windows-amd64"){
                     steps {
-                        echo "Building for $RELASE on $STAGE_NAME"
+                        echo "Building for $RELEASE on $STAGE_NAME"
                     }
                 }
             }
