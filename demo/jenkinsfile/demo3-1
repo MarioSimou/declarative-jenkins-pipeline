@@ -1,0 +1,48 @@
+pipelines {
+    agent any
+    environment {
+        RELEASE="20.04"
+    }
+
+    stages {
+        stage("Build"){
+            parallel {
+                stage("linux"){
+                    steps {
+                        echo "Building for $STAGE_NAME"
+                    }
+                }
+                stage("macos"){
+                    steps {
+                        echo "Building for $STAGE_NAME"
+                    }
+                }
+            }
+        }
+        stage("Testing"){
+            steps {
+                sh '''
+                    echo "Runnint unit tests"
+                '''
+            }
+        }
+        stage("Deploying"){
+            input {
+                parameters {
+                    string(name: "ENVIRONMENT", defaultValue: "production", description: "Description")
+                }
+            }
+            steps{
+                sh '''
+                    echo "Deploying to ${params.ENVIRONMENT}"
+                '''
+                writeFile file: "test.xt", text: "hello world"
+            }
+        }
+    }
+    post {
+        success {
+            archiveArtifacts "test.txt"
+        }
+    }
+}
