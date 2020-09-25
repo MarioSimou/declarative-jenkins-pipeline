@@ -14,21 +14,13 @@ pipeline {
             }
         }
         stage("Unit tests"){
-            dir('./server'){
-                steps {
-                    sh '''
-                    go test -v ./...
-                    '''
-                }
+            steps {
+                sh "go test -v ./..."
             }
         }
         stage("Build app"){
-            dir("./server"){
-                steps {
-                    sh '''
-                        go build -o ./bin/server ./cmd/server/main.go
-                    '''
-                }
+            steps {
+                sh "go build -o ./bin/server ./cmd/server/main.go"
             }
         }
         stage("Deploy"){
