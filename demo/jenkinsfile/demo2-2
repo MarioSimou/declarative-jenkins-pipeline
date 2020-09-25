@@ -24,14 +24,14 @@ pipeline {
             }
         }
         stage("Deploy"){
-            steps{
-                input {
-                    message "Pick environment"
-                    parameters {
-                        string(name: "ENVIRONMENT", defaultValue: "production", description: "Environment we deploy")
-                    }
+            input {
+                message "Pick environment"
+                parameters {
+                    string(name: "ENVIRONMENT", defaultValue: "production", description: "Environment we deploy")
                 }
+            }
 
+            steps{
                 sh '''
                     printf "App is deployed on %s\n" $ENVIRONMENT
                 '''
