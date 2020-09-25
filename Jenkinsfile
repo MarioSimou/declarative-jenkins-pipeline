@@ -9,7 +9,9 @@ pipeline {
         stage('First stage') {
             steps {
                 echo "This is $BUILD_NUMBER of demo $DEMO"
-                sh 'echo "hello world" > test.sh && chmod +x ./test.sh && ./test.sh'
+                sh '''
+                    ./scripts/test.sh
+                '''
             }
         }
     }
