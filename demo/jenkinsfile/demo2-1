@@ -10,13 +10,17 @@ pipeline {
             environment {
                 LOG_LEVEL="INFO"
             }
-            step {
-                echo "Building ${RELEASE} with log level ${LOG_LEVEL}"
+            steps {
+                step {
+                    echo "Building ${RELEASE} with log level ${LOG_LEVEL}"
+                }
             }
         }
         stage("Test") {
-            step {
-                echo "Testing. Running tests for release ${RELEASE}"
+            steps {
+                step {
+                    echo "Testing. Running tests for release ${RELEASE}"
+                }
             }
         }
     }
