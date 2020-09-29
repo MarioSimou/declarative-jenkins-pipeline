@@ -22,7 +22,7 @@ pipeline {
         stage('Generates binary and release it'){
             when {
                 expression {
-                    parameters.RELEASE == 'true'
+                    params.RELEASE == 'true'
                 }
             }
             steps {
