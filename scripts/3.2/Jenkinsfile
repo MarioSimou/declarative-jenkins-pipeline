@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage('Check versions'){
             steps {
-                auditTools()
+                script {
+                    def utils = load("Utils.groovy")
+                    utils.auditTools()
+                }
             }
         }
         stage('Unit tests'){
