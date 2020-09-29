@@ -19,6 +19,11 @@ pipeline {
                 sh 'go test ./scripts/3.1/internal/...'
             }
         }
+        stage('Deploy'){
+            when {
+                parameters.RELEASE
+            }
+        }
     }
     post {
         success {
