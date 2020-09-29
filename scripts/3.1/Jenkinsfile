@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: "RELEASE", defaultValue: "false", description: "Check this option only if its a release")
+    }
+    stages {
+        stage('Check versions'){
+            steps {
+                sh '''
+                    go version
+                    git --version
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo "Successful build"
+        }
+        failure {
+            echo "Failure"
+        }
+    }
+}

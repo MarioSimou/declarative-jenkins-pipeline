@@ -1,0 +1,15 @@
+version: '3.7'
+
+volumes:
+  jenkins_data:
+
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+        - type: volume
+          source: jenkins_data
+          target: /var/jenkins_home
