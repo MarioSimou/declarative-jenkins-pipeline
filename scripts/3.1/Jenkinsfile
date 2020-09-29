@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Generates binary and release it'){
             when {
-                parameters.RELEASE
+                parameters name: 'RELEASE', value: 'true'
             }
             steps {
                 sh '''
