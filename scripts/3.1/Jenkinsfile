@@ -9,9 +9,7 @@ pipeline {
     stages {
         stage('Check versions'){
             steps {
-                script {
-                    auditTools()
-                }
+                auditTools()
             }
         }
         stage('Unit tests'){
