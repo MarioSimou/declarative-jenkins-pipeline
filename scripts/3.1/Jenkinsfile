@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        booleanParam(name: "RELEASE", defaultValue: "false", description: "Check this option only if its a release")
+        booleanParam(name: "RELEASE", defaultValue: false, description: "Check this option only if its a release")
     }
     tools {
         go 'go-1.15.2'
@@ -22,7 +22,7 @@ pipeline {
         stage('Generates binary and release it'){
             when {
                 expression {
-                    params.RELEASE == 'true'
+                    return params.RELEASE
                 }
             }
             steps {
