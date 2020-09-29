@@ -9,10 +9,7 @@ pipeline {
     stages {
         stage('Check versions'){
             steps {
-                script {
-                    def Utils = load 'Utils.groovy'
-                    Utils.auditTools()
-                }
+                auditTools()
             }
         }
         stage('Unit tests'){
@@ -41,11 +38,4 @@ pipeline {
             echo "Failure"
         }
     }
-}
-
-void auditTools(){
-    sh '''
-        go version
-        git --version
-    '''
 }
