@@ -10,7 +10,7 @@ pipeline {
         stage('Check versions'){
             steps {
                 script {
-                    def utils = load("Utils.groovy")
+                    def utils = load("scripts/3.2/Utils.groovy")
                     utils.auditTools()
                 }
             }
