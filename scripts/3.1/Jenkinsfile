@@ -16,11 +16,7 @@ pipeline {
         }
         stage('Unit tests'){
             steps {
-                dir('./scripts/3.1'){
-                    sh 'pwd'
-                    sh 'ls -al'
-                    sh 'go test ./...'
-                }
+                sh 'go test ./scripts/3.1/interna/...'
             }
         }
     }
