@@ -40,7 +40,7 @@ pipeline {
     }
 }
 
-String auditTools(){
+void auditTools(){
     sh '''
         go version
         git --version
