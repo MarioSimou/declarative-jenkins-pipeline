@@ -19,9 +19,14 @@ pipeline {
                 sh 'go test ./scripts/3.1/internal/...'
             }
         }
-        stage('Deploy'){
+        stage('Generates binary and release it'){
             when {
                 parameters.RELEASE
+            }
+            steps {
+                sh '''
+                    go build -o ./scripts/3.1/bin/server ./scripts/3.1/cmd/server/main.go 
+                '''
             }
         }
     }
