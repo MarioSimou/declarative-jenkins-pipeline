@@ -3,6 +3,9 @@ pipeline {
     parameters {
         booleanParam(name: "RELEASE", defaultValue: "false", description: "Check this option only if its a release")
     }
+    tools {
+        go 'go-1.15.2'
+    }
     stages {
         stage('Check versions'){
             steps {
