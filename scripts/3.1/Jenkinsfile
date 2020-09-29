@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Unit tests'){
             steps {
-                sh '$PWD'
+                sh 'pwd'
                 sh 'go test ./...'
             }
         }
