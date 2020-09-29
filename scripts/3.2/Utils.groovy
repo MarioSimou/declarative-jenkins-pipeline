@@ -1,6 +1,8 @@
  def auditTools() {
-     sh '''
-        go version
-        git --version
-     '''
+     node {
+        sh '''
+            go version
+            git --version
+        '''
+     }
  }
