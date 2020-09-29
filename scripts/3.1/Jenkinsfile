@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Unit tests'){
             steps {
-                sh 'go test ./scripts/3.1/interna/...'
+                sh 'go test ./scripts/3.1/internal/...'
             }
         }
     }
