@@ -1,22 +1,25 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image "golang:1.14-buster"
+        }
+    }
     parameters {
         booleanParam(name: "RELEASE", defaultValue: false, description: "Check this option only if its a release")
     }
     
     stages {
         stage('Check versions'){
-            agent {
-                docker {
-                    image "golang:1.14-buster"
-                }
-            }
             steps {
-                sh '''
-                    docker info
-                    git --version
-                    go version
-                '''
+                script {
+                    docker.image("golang:1.14-buster").inside {
+                        sh '''
+                            docker info
+                            git --version
+                            go version
+                        '''
+                    }
+                }
             }
         }
         stage('Unit tests'){
