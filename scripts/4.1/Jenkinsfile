@@ -12,6 +12,7 @@ pipeline {
         stage('Check versions'){
             steps {
                 sh '''
+                    docker info
                     git --version
                     go version
                 '''
