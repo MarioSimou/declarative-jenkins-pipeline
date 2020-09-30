@@ -1,0 +1,46 @@
+pipeline {
+    agent {
+        docker {
+            image "golang:1.14-buster"
+        }
+    }
+    parameters {
+        booleanParam(name: "RELEASE", defaultValue: false, description: "Check this option only if its a release")
+    }
+    
+    stages {
+        stage('Check versions'){
+            steps {
+                sh '''
+                    git --version
+                    go version
+                '''
+            }
+        }
+        stage('Unit tests'){
+            steps {
+                sh 'go test ./scripts/4.1/internal/...'
+            }
+        }
+        stage('Generates binary and release it'){
+            when {
+                expression {
+                    return params.RELEASE
+                }
+            }
+            steps {
+                sh '''
+                    go build -o ./scripts/4.1/bin/server ./scripts/3.1/cmd/server/main.go 
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo "Successful build"
+        }
+        failure {
+            echo "Failure"
+        }
+    }
+}
