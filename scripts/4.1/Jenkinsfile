@@ -11,15 +11,10 @@ pipeline {
     stages {
         stage('Check versions'){
             steps {
-                script {
-                    withDockerContainer("golang:1.14-buster") {
-                        sh '''
-                            docker info
-                            git --version
-                            go version
-                        '''
-                    }
-                }
+                sh '''
+                    git --version
+                    go version
+                '''
             }
         }
         stage('Unit tests'){
