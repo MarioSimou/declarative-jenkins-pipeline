@@ -10,6 +10,11 @@ pipeline {
     
     stages {
         stage('Check versions'){
+            agent {
+                docker {
+                    image "golang:1.14-buster"
+                }
+            }
             steps {
                 sh '''
                     git --version
