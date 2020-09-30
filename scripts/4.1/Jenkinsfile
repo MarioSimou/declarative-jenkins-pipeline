@@ -12,7 +12,7 @@ pipeline {
         stage('Check versions'){
             steps {
                 script {
-                    docker.image("golang:1.14-buster").inside {
+                    withDockerContainer("golang:1.14-buster") {
                         sh '''
                             docker info
                             git --version
